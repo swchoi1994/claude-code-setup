@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code &mdash; Feature Showcase</title>
+<style>
+  :root {
+    --bg: #eef1f6;
+    --surface: #ffffff;
+    --border: #d8dce6;
+    --text: #1e2a3a;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --code-bg: #f4f6fa;
+    --accent: #4a6fa5;
+    --accent-light: #e8edf5;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+    --radius: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === HEADER === */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 40px;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 12px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    max-width: 680px;
+  }
+
+  /* === STATS BAR === */
+  .stats-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 40px;
+  }
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .stat-num {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* === CONTAINER === */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* === SECTION === */
+  .section {
+    margin-top: 48px;
+  }
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  /* === CARDS === */
+  .grid {
+    display: grid;
+    gap: 16px;
+  }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+
+  @media (max-width: 860px) {
+    .g2, .g3, .g4 { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .card-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 8px;
+    margin-top: 10px;
+  }
+  .card-ver {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+
+  /* === CODE BLOCK === */
+  .code-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .code-tab {
+    background: var(--code-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 20px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+  .code-body {
+    padding: 20px 24px;
+    font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--text);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .code-body .cm { color: var(--text-muted); }
+
+  /* === FLOW DIAGRAM === */
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0;
+    margin: 0 0 24px;
+  }
+  .flow-step {
+    display: flex;
+    align-items: center;
+  }
+  .flow-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    text-align: center;
+    min-width: 110px;
+    box-shadow: var(--shadow);
+  }
+  .flow-box .fl {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+  }
+  .flow-box .fn {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .flow-box .fs {
+    font-size: 0.7rem;
+    color: var(--accent);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    margin-top: 2px;
+  }
+  .flow-arrow {
+    color: var(--border);
+    font-size: 1.3rem;
+    padding: 0 8px;
+    user-select: none;
+  }
+
+  /* === CHIP LIST === */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 14px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    box-shadow: var(--shadow);
+  }
+
+  /* === AGENT LIST === */
+  .agent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+  }
+  .agent-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+  }
+  .agent-item h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    margin-bottom: 3px;
+  }
+  .agent-item p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .agent-cat {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  /* === MCP === */
+  .mcp-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+  }
+  .mcp-item h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .mcp-item p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+
+  /* === PERMISSION PILLS === */
+  .perm-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .perm {
+    background: var(--accent-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  /* === TOOL GROUP === */
+  .tool-section {
+    margin-bottom: 16px;
+  }
+  .tool-section:last-child { margin-bottom: 0; }
+  .tool-section-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* === SUB-SECTION LABEL === */
+  .sub-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="badge">v2.1.89 &middot; Claude Opus 4.6 &middot; 1M context</div>
+    <h1>Claude Code Feature Showcase</h1>
+    <p>A fully loaded AI development environment with plugins, skills, specialized agents, and deep integrations &mdash; all configured for high-effort, autonomous engineering workflows.</p>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><span class="stat-num">6</span><span class="stat-label">Plugins</span></div>
+    <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Skills</span></div>
+    <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Agents</span></div>
+    <div class="stat"><span class="stat-num">20+</span><span class="stat-label">Built-in Tools</span></div>
+    <div class="stat"><span class="stat-num">4</span><span class="stat-label">API Integrations</span></div>
+    <div class="stat"><span class="stat-num">12</span><span class="stat-label">Projects</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ==================== PLUGINS ==================== -->
+<div class="section">
+  <div class="section-title">Installed Plugins</div>
+  <div class="grid g3">
+    <div class="card">
+      <h3>Superpowers <span class="card-ver">v5.0.5</span></h3>
+      <p>Enhanced workflow skills: brainstorming, planning, TDD, debugging, code review, git worktrees, parallel agent dispatch, and verification before completion.</p>
+      <span class="card-label">claude-plugins-official</span>
+    </div>
+    <div class="card">
+      <h3>Compound Engineering <span class="card-ver">v2.59.0</span></h3>
+      <p>Full-stack engineering toolkit: frontend design, browser testing, document review, git workflows, research agents, 20+ code review personas.</p>
+      <span class="card-label">EveryInc</span>
+    </div>
+    <div class="card">
+      <h3>Context7</h3>
+      <p>Live documentation fetcher for any library, framework, or SDK. Queries current docs even when training data is outdated.</p>
+      <span class="card-label">claude-plugins-official</span>
+    </div>
+    <div class="card">
+      <h3>Code Review</h3>
+      <p>PR review skill that orchestrates multi-persona code review with tiered agents for correctness, security, performance, and style.</p>
+      <span class="card-label">claude-plugins-official</span>
+    </div>
+    <div class="card">
+      <h3>GitHub</h3>
+      <p>Native GitHub integration for issues, pull requests, checks, releases, and repository management via the gh CLI.</p>
+      <span class="card-label">claude-plugins-official</span>
+    </div>
+    <div class="card">
+      <h3>Swift LSP</h3>
+      <p>Language Server Protocol support for Swift development with code intelligence, diagnostics, and completions.</p>
+      <span class="card-label">claude-plugins-official</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== WORKFLOW ==================== -->
+<div class="section">
+  <div class="section-title">Development Workflow Pattern</div>
+  <p class="sub-label">The full skill-driven lifecycle. Each stage is backed by a dedicated skill that enforces engineering rigor.</p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-box">
+        <div class="fl">Step 1</div>
+        <div class="fn">Brainstorm</div>
+        <div class="fs">/brainstorming</div>
+      </div><div class="flow-arrow">&rarr;</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-box">
+        <div class="fl">Step 2</div>
+        <div class="fn">Write Plan</div>
+        <div class="fs">/writing-plans</div>
+      </div><div class="flow-arrow">&rarr;</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-box">
+        <div class="fl">Step 3</div>
+        <div class="fn">Execute</div>
+        <div class="fs">/executing-plans</div>
+      </div><div class="flow-arrow">&rarr;</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-box">
+        <div class="fl">Step 4</div>
+        <div class="fn">TDD</div>
+        <div class="fs">/test-driven-dev</div>
+      </div><div class="flow-arrow">&rarr;</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-box">
+        <div class="fl">Step 5</div>
+        <div class="fn">Review</div>
+        <div class="fs">/ce-review</div>
+      </div><div class="flow-arrow">&rarr;</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-box">
+        <div class="fl">Step 6</div>
+        <div class="fn">Verify</div>
+        <div class="fs">/verification</div>
+      </div><div class="flow-arrow">&rarr;</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-box">
+        <div class="fl">Step 7</div>
+        <div class="fn">Ship</div>
+        <div class="fs">/finishing-branch</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Parallel Execution</h3>
+      <p>Independent tasks are dispatched to parallel sub-agents via <code>/dispatching-parallel-agents</code> or <code>/subagent-driven-development</code>. Each agent works in isolation, then results merge back.</p>
+    </div>
+    <div class="card">
+      <h3>Git Worktrees</h3>
+      <p>Feature work is isolated using <code>/using-git-worktrees</code>. Each worktree gets its own branch and working directory so parallel features never conflict.</p>
+    </div>
+    <div class="card">
+      <h3>Systematic Debugging</h3>
+      <p>Bugs trigger <code>/systematic-debugging</code> before any fix is proposed. Root cause analysis first, then targeted fix, then verification.</p>
+    </div>
+    <div class="card">
+      <h3>Persistent Memory</h3>
+      <p>File-based memory stores user preferences, feedback, project context, and external references across sessions. Indexed via <code>MEMORY.md</code>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SETTINGS.JSON ==================== -->
+<div class="section">
+  <div class="section-title">Configuration (settings.json)</div>
+  <div class="code-card">
+    <div class="code-tab">settings.json</div>
+    <div class="code-body">{
+  "enabledPlugins": {
+    "code-review@claude-plugins-official":          true,
+    "context7@claude-plugins-official":              true,
+    "github@claude-plugins-official":                true,
+    "swift-lsp@claude-plugins-official":             true,
+    "superpowers@claude-plugins-official":            true,
+    "compound-engineering@compound-engineering-plugin": true
+  },
+  "extraKnownMarketplaces": {
+    "compound-engineering-plugin": {
+      "source": { "source": "github", "repo": "EveryInc/compound-engineering-plugin" }
+    }
+  },
+  "effortLevel": "high",                            <span class="cm">// max reasoning depth</span>
+  "skipDangerousModePermissionPrompt": true           <span class="cm">// faster iteration</span>
+}</div>
+  </div>
+</div>
+
+<!-- ==================== SKILLS ==================== -->
+<div class="section">
+  <div class="section-title">Available Skills (Slash Commands)</div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Superpowers</h3>
+      <div class="chips" style="margin-top: 10px;">
+        <span class="chip">/brainstorming</span>
+        <span class="chip">/writing-plans</span>
+        <span class="chip">/executing-plans</span>
+        <span class="chip">/test-driven-development</span>
+        <span class="chip">/systematic-debugging</span>
+        <span class="chip">/requesting-code-review</span>
+        <span class="chip">/receiving-code-review</span>
+        <span class="chip">/verification-before-completion</span>
+        <span class="chip">/finishing-a-development-branch</span>
+        <span class="chip">/dispatching-parallel-agents</span>
+        <span class="chip">/subagent-driven-development</span>
+        <span class="chip">/using-git-worktrees</span>
+        <span class="chip">/writing-skills</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Compound Engineering &mdash; Workflow</h3>
+      <div class="chips" style="margin-top: 10px;">
+        <span class="chip">/ce-brainstorm</span>
+        <span class="chip">/ce-plan</span>
+        <span class="chip">/ce-work</span>
+        <span class="chip">/ce-review</span>
+        <span class="chip">/ce-ideate</span>
+        <span class="chip">/ce-compound</span>
+        <span class="chip">/git-commit</span>
+        <span class="chip">/git-commit-push-pr</span>
+        <span class="chip">/git-clean-gone-branches</span>
+        <span class="chip">/git-worktree</span>
+        <span class="chip">/reproduce-bug</span>
+        <span class="chip">/todo-resolve</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Compound Engineering &mdash; Design &amp; Docs</h3>
+      <div class="chips" style="margin-top: 10px;">
+        <span class="chip">/frontend-design</span>
+        <span class="chip">/agent-browser</span>
+        <span class="chip">/test-browser</span>
+        <span class="chip">/feature-video</span>
+        <span class="chip">/gemini-imagegen</span>
+        <span class="chip">/onboarding</span>
+        <span class="chip">/proof</span>
+        <span class="chip">/document-review</span>
+        <span class="chip">/every-style-editor</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Framework &amp; Utilities</h3>
+      <div class="chips" style="margin-top: 10px;">
+        <span class="chip">/claude-api</span>
+        <span class="chip">/agent-native-architecture</span>
+        <span class="chip">/dhh-rails-style</span>
+        <span class="chip">/andrew-kane-gem-writer</span>
+        <span class="chip">/dspy-ruby</span>
+        <span class="chip">/rclone</span>
+        <span class="chip">/simplify</span>
+        <span class="chip">/loop</span>
+        <span class="chip">/schedule</span>
+        <span class="chip">/update-config</span>
+        <span class="chip">/keybindings-help</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== AGENTS ==================== -->
+<div class="section">
+  <div class="section-title">Specialized Sub-Agents</div>
+  <p class="sub-label">Autonomous agents dispatched for specific tasks. Can run in parallel or foreground, each with isolated context.</p>
+
+  <div style="margin-bottom: 20px;">
+    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Core</div>
+    <div class="agent-grid">
+      <div class="agent-item"><h4>Explore</h4><p>Fast codebase exploration &mdash; find files, search code, answer architecture questions.</p></div>
+      <div class="agent-item"><h4>Plan</h4><p>Software architect for designing implementation strategies and identifying trade-offs.</p></div>
+      <div class="agent-item"><h4>claude-code-guide</h4><p>Answers questions about Claude Code features, hooks, MCP servers, and SDK usage.</p></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Research</div>
+    <div class="agent-grid">
+      <div class="agent-item"><h4>framework-docs-researcher</h4><p>Gathers official docs and best practices for any framework or library.</p></div>
+      <div class="agent-item"><h4>git-history-analyzer</h4><p>Archaeological git analysis &mdash; trace code evolution, understand why patterns exist.</p></div>
+      <div class="agent-item"><h4>repo-research-analyst</h4><p>Deep repo structure, conventions, patterns, and documentation analysis.</p></div>
+      <div class="agent-item"><h4>issue-intelligence-analyst</h4><p>GitHub issue analysis &mdash; recurring themes, pain patterns, severity trends.</p></div>
+      <div class="agent-item"><h4>best-practices-researcher</h4><p>Researches external best practices, community conventions, and implementation guidance.</p></div>
+      <div class="agent-item"><h4>learnings-researcher</h4><p>Searches past solutions to surface institutional knowledge and prevent repeated mistakes.</p></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Code Review (20+ personas)</div>
+    <div class="agent-grid">
+      <div class="agent-item"><h4>correctness-reviewer</h4><p>Always-on. Logic errors, edge cases, state management bugs, intent mismatches.</p></div>
+      <div class="agent-item"><h4>maintainability-reviewer</h4><p>Always-on. Premature abstraction, dead code, coupling, naming clarity.</p></div>
+      <div class="agent-item"><h4>testing-reviewer</h4><p>Always-on. Coverage gaps, weak assertions, brittle tests, missing edge cases.</p></div>
+      <div class="agent-item"><h4>security-reviewer</h4><p>Auth, endpoints, user input, permissions &mdash; exploitable vulnerabilities.</p></div>
+      <div class="agent-item"><h4>performance-reviewer</h4><p>DB queries, loops, caching, I/O &mdash; scalability and runtime issues.</p></div>
+      <div class="agent-item"><h4>adversarial-reviewer</h4><p>Constructs failure scenarios for large or high-risk diffs.</p></div>
+      <div class="agent-item"><h4>api-contract-reviewer</h4><p>API routes, serialization, versioning &mdash; breaking contract changes.</p></div>
+      <div class="agent-item"><h4>data-migrations-reviewer</h4><p>Migration files, schema changes, data integrity, backfill safety.</p></div>
+      <div class="agent-item"><h4>reliability-reviewer</h4><p>Error handling, retries, circuit breakers, timeouts, health checks.</p></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Design &amp; Documents</div>
+    <div class="agent-grid">
+      <div class="agent-item"><h4>design-iterator</h4><p>Iterative UI refinement through N screenshot-analyze-improve cycles.</p></div>
+      <div class="agent-item"><h4>figma-design-sync</h4><p>Detects and fixes visual differences between implementation and Figma.</p></div>
+      <div class="agent-item"><h4>adversarial-document-reviewer</h4><p>Challenges premises, surfaces assumptions, stress-tests decisions.</p></div>
+      <div class="agent-item"><h4>feasibility-reviewer</h4><p>Evaluates if proposed approaches survive reality.</p></div>
+      <div class="agent-item"><h4>scope-guardian-reviewer</h4><p>Challenges unnecessary abstractions and scope creep.</p></div>
+      <div class="agent-item"><h4>spec-flow-analyzer</h4><p>Specs for flow completeness, edge cases, and requirement gaps.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TOOLS ==================== -->
+<div class="section">
+  <div class="section-title">Built-in Tools</div>
+  <div class="grid g2">
+    <div class="card">
+      <div class="tool-section">
+        <div class="tool-section-title">File Operations</div>
+        <div class="chips"><span class="chip">Read</span><span class="chip">Write</span><span class="chip">Edit</span><span class="chip">Glob</span><span class="chip">Grep</span><span class="chip">NotebookEdit</span></div>
+      </div>
+      <div class="tool-section">
+        <div class="tool-section-title">Execution</div>
+        <div class="chips"><span class="chip">Bash</span><span class="chip">LSP</span></div>
+      </div>
+      <div class="tool-section">
+        <div class="tool-section-title">Web &amp; Search</div>
+        <div class="chips"><span class="chip">WebFetch</span><span class="chip">WebSearch</span><span class="chip">ToolSearch</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tool-section">
+        <div class="tool-section-title">Task Management</div>
+        <div class="chips"><span class="chip">TaskCreate</span><span class="chip">TaskUpdate</span><span class="chip">TaskList</span><span class="chip">TaskGet</span><span class="chip">TaskStop</span><span class="chip">TaskOutput</span></div>
+      </div>
+      <div class="tool-section">
+        <div class="tool-section-title">Planning &amp; Orchestration</div>
+        <div class="chips"><span class="chip">Agent</span><span class="chip">Skill</span><span class="chip">EnterPlanMode</span><span class="chip">ExitPlanMode</span><span class="chip">EnterWorktree</span><span class="chip">ExitWorktree</span></div>
+      </div>
+      <div class="tool-section">
+        <div class="tool-section-title">Scheduling &amp; Remote</div>
+        <div class="chips"><span class="chip">CronCreate</span><span class="chip">CronDelete</span><span class="chip">CronList</span><span class="chip">RemoteTrigger</span><span class="chip">AskUserQuestion</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MCP ==================== -->
+<div class="section">
+  <div class="section-title">API Integrations (MCP Servers)</div>
+  <div class="grid g2">
+    <div class="mcp-item">
+      <h3>Context7</h3>
+      <p>Live documentation queries for any library, framework, or SDK. Two instances running (plugin + standalone) for redundancy.</p>
+    </div>
+    <div class="mcp-item">
+      <h3>Gmail</h3>
+      <p>Read, search, and manage email directly from the coding environment via OAuth authentication.</p>
+    </div>
+    <div class="mcp-item">
+      <h3>Google Calendar</h3>
+      <p>View and manage calendar events, check availability, and create meetings.</p>
+    </div>
+    <div class="mcp-item">
+      <h3>Notion</h3>
+      <p>Access Notion workspaces &mdash; read pages, query databases, manage content.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PERMISSIONS ==================== -->
+<div class="section">
+  <div class="section-title">Pre-Approved Permissions</div>
+  <p class="sub-label">Commands auto-allowed without confirmation prompt, configured in settings.local.json.</p>
+  <div class="perm-pills">
+    <span class="perm">python / python3</span>
+    <span class="perm">pip / pip3 install</span>
+    <span class="perm">npm install / build / check</span>
+    <span class="perm">bun</span>
+    <span class="perm">mkdir / chmod</span>
+    <span class="perm">tree / ls / find</span>
+    <span class="perm">curl / ping</span>
+    <span class="perm">timeout</span>
+    <span class="perm">kill / pkill</span>
+    <span class="perm">open</span>
+    <span class="perm">pdflatex / pandoc</span>
+    <span class="perm">huggingface-cli</span>
+    <span class="perm">WebSearch</span>
+    <span class="perm">WebFetch (cdnjs, metorial, stack-ai)</span>
+  </div>
+</div>
+
+<!-- ==================== PLATFORM ==================== -->
+<div class="section">
+  <div class="section-title">Key Design Decisions</div>
+  <div class="grid g2">
+    <div class="card">
+      <h3>High Effort, Always</h3>
+      <p>effortLevel is set to "high" globally. Every task gets maximum reasoning depth &mdash; no shortcuts, no shallow passes.</p>
+    </div>
+    <div class="card">
+      <h3>Skill-First Workflow</h3>
+      <p>Before any action, relevant skills are checked and invoked. Skills enforce discipline: brainstorm before build, verify before ship.</p>
+    </div>
+    <div class="card">
+      <h3>Dangerous Mode Enabled</h3>
+      <p>Permission prompts are skipped for faster iteration. Pre-approved commands cover the common toolchain (Python, Node, git, etc.).</p>
+    </div>
+    <div class="card">
+      <h3>Multi-Marketplace Plugins</h3>
+      <p>Draws from 3 plugin sources: Anthropic Official, EveryInc (Compound Engineering), and thedotmack (claude-mem). Community + first-party.</p>
+    </div>
+    <div class="card">
+      <h3>Agent-Native Architecture</h3>
+      <p>30+ specialized sub-agents for research, review, design, and workflow. Tasks are parallelized and isolated by default.</p>
+    </div>
+    <div class="card">
+      <h3>Cross-Session Memory</h3>
+      <p>Persistent file-based memory indexed by MEMORY.md. Stores user context, feedback, project state, and external references across conversations.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PROJECTS ==================== -->
+<div class="section">
+  <div class="section-title">Tracked Projects</div>
+  <div class="chips">
+    <span class="chip">AstraTech Botim AI Platform</span>
+    <span class="chip">OpenCoder</span>
+    <span class="chip">farmGame</span>
+    <span class="chip">inviAssessment</span>
+    <span class="chip">muddle</span>
+    <span class="chip">realVoice</span>
+    <span class="chip">research</span>
+    <span class="chip">research-icml2026</span>
+    <span class="chip">setup</span>
+    <span class="chip">soundless</span>
+    <span class="chip">timefulKr</span>
+    <span class="chip">UPenn-NLP-Homework-9</span>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  Claude Code v2.1.89 &middot; Opus 4.6 (1M context) &middot; April 1, 2026
+  <br>
+  <a href="https://github.com/anthropics/claude-code">github.com/anthropics/claude-code</a>
+</footer>
+
+</body>
+</html>
