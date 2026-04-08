@@ -1,0 +1,42 @@
+name: Auto-update Claude Code version
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 6 AM UTC
+  workflow_dispatch:       # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get latest Claude Code version
+        id: version
+        run: |
+          LATEST=$(curl -s https://registry.npmjs.org/@anthropic-ai/claude-code/latest | jq -r '.version')
+          CURRENT=$(grep -oP 'v\K[0-9]+\.[0-9]+\.[0-9]+' index.html | head -1)
+          echo "latest=$LATEST" >> "$GITHUB_OUTPUT"
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "Current: $CURRENT -> Latest: $LATEST"
+
+      - name: Update version in index.html
+        if: steps.version.outputs.latest != steps.version.outputs.current
+        run: |
+          OLD="${{ steps.version.outputs.current }}"
+          NEW="${{ steps.version.outputs.latest }}"
+          sed -i "s/v${OLD}/v${NEW}/g" index.html
+          TODAY=$(date -u +'%B %-d, %Y')
+          sed -i "s/\(Opus 4.6 (1M context) &middot; \)[A-Za-z]* [0-9]*, [0-9]*/\1${TODAY}/" index.html
+
+      - name: Commit and push
+        if: steps.version.outputs.latest != steps.version.outputs.current
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Auto-update Claude Code version to v${{ steps.version.outputs.latest }}"
+          git push

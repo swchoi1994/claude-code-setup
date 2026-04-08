@@ -359,7 +359,7 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <div class="badge">v2.1.89 &middot; Claude Opus 4.6 &middot; 1M context</div>
+    <div class="badge">v2.1.96 &middot; Claude Opus 4.6 &middot; 1M context</div>
     <h1>Claude Code Feature Showcase</h1>
     <p>A fully loaded AI development environment with plugins, skills, specialized agents, and deep integrations &mdash; all configured for high-effort, autonomous engineering workflows.</p>
   </div>
@@ -370,7 +370,7 @@
   <div class="stats-inner">
     <div class="stat"><span class="stat-num">6</span><span class="stat-label">Plugins</span></div>
     <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Skills</span></div>
-    <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Agents</span></div>
+    <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Agents</span></div>
     <div class="stat"><span class="stat-num">20+</span><span class="stat-label">Built-in Tools</span></div>
     <div class="stat"><span class="stat-num">4</span><span class="stat-label">API Integrations</span></div>
     <div class="stat"><span class="stat-num">12</span><span class="stat-label">Projects</span></div>
@@ -556,6 +556,7 @@
         <span class="chip">/git-worktree</span>
         <span class="chip">/reproduce-bug</span>
         <span class="chip">/todo-resolve</span>
+        <span class="chip">/claude-permissions-optimizer</span>
       </div>
     </div>
     <div class="card">
@@ -586,6 +587,7 @@
         <span class="chip">/schedule</span>
         <span class="chip">/update-config</span>
         <span class="chip">/keybindings-help</span>
+        <span class="chip">/apply-anthropic-skill-best-practices</span>
       </div>
     </div>
   </div>
@@ -618,17 +620,33 @@
   </div>
 
   <div style="margin-bottom: 20px;">
-    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Code Review (20+ personas)</div>
+    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Code Review (27 personas)</div>
     <div class="agent-grid">
       <div class="agent-item"><h4>correctness-reviewer</h4><p>Always-on. Logic errors, edge cases, state management bugs, intent mismatches.</p></div>
       <div class="agent-item"><h4>maintainability-reviewer</h4><p>Always-on. Premature abstraction, dead code, coupling, naming clarity.</p></div>
       <div class="agent-item"><h4>testing-reviewer</h4><p>Always-on. Coverage gaps, weak assertions, brittle tests, missing edge cases.</p></div>
+      <div class="agent-item"><h4>project-standards-reviewer</h4><p>Always-on. Audits changes against CLAUDE.md/AGENTS.md standards.</p></div>
       <div class="agent-item"><h4>security-reviewer</h4><p>Auth, endpoints, user input, permissions &mdash; exploitable vulnerabilities.</p></div>
       <div class="agent-item"><h4>performance-reviewer</h4><p>DB queries, loops, caching, I/O &mdash; scalability and runtime issues.</p></div>
       <div class="agent-item"><h4>adversarial-reviewer</h4><p>Constructs failure scenarios for large or high-risk diffs.</p></div>
       <div class="agent-item"><h4>api-contract-reviewer</h4><p>API routes, serialization, versioning &mdash; breaking contract changes.</p></div>
       <div class="agent-item"><h4>data-migrations-reviewer</h4><p>Migration files, schema changes, data integrity, backfill safety.</p></div>
       <div class="agent-item"><h4>reliability-reviewer</h4><p>Error handling, retries, circuit breakers, timeouts, health checks.</p></div>
+      <div class="agent-item"><h4>architecture-strategist</h4><p>Pattern compliance, design integrity, structural refactors.</p></div>
+      <div class="agent-item"><h4>code-simplicity-reviewer</h4><p>Final pass for YAGNI violations and simplification opportunities.</p></div>
+      <div class="agent-item"><h4>security-sentinel</h4><p>OWASP compliance, input validation, hardcoded secrets, auth audits.</p></div>
+      <div class="agent-item"><h4>performance-oracle</h4><p>Algorithmic complexity, memory usage, DB queries, scalability.</p></div>
+      <div class="agent-item"><h4>agent-native-reviewer</h4><p>Ensures agent-native parity &mdash; any user action, an agent can also take.</p></div>
+      <div class="agent-item"><h4>pattern-recognition-specialist</h4><p>Design patterns, anti-patterns, naming conventions, duplication.</p></div>
+      <div class="agent-item"><h4>data-integrity-guardian</h4><p>Migration safety, data constraints, transaction boundaries, privacy.</p></div>
+      <div class="agent-item"><h4>schema-drift-detector</h4><p>Cross-references schema.rb changes against included migrations.</p></div>
+      <div class="agent-item"><h4>kieran-typescript-reviewer</h4><p>Strict bar for type safety, clarity, and maintainability in TypeScript.</p></div>
+      <div class="agent-item"><h4>kieran-rails-reviewer</h4><p>Strict bar for clarity, conventions, and maintainability in Rails.</p></div>
+      <div class="agent-item"><h4>kieran-python-reviewer</h4><p>Pythonic clarity, type hints, and maintainability.</p></div>
+      <div class="agent-item"><h4>dhh-rails-reviewer</h4><p>Opinionated DHH perspective on Rails architecture and patterns.</p></div>
+      <div class="agent-item"><h4>previous-comments-reviewer</h4><p>Checks whether prior PR feedback has been addressed in the current diff.</p></div>
+      <div class="agent-item"><h4>deployment-verification-agent</h4><p>Go/No-Go checklists, SQL verification, rollback procedures.</p></div>
+      <div class="agent-item"><h4>cli-agent-readiness-reviewer</h4><p>Reviews CLIs for AI agent readiness using severity-based rubric.</p></div>
     </div>
   </div>
 
@@ -636,11 +654,26 @@
     <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Design &amp; Documents</div>
     <div class="agent-grid">
       <div class="agent-item"><h4>design-iterator</h4><p>Iterative UI refinement through N screenshot-analyze-improve cycles.</p></div>
+      <div class="agent-item"><h4>design-implementation-reviewer</h4><p>Compares live UI against Figma designs for design fidelity feedback.</p></div>
       <div class="agent-item"><h4>figma-design-sync</h4><p>Detects and fixes visual differences between implementation and Figma.</p></div>
       <div class="agent-item"><h4>adversarial-document-reviewer</h4><p>Challenges premises, surfaces assumptions, stress-tests decisions.</p></div>
+      <div class="agent-item"><h4>coherence-reviewer</h4><p>Reviews for internal consistency, contradictions, and terminology drift.</p></div>
+      <div class="agent-item"><h4>product-lens-reviewer</h4><p>Senior product leader perspective on scope and goal alignment.</p></div>
+      <div class="agent-item"><h4>design-lens-reviewer</h4><p>Missing design decisions: IA, interaction states, user flows.</p></div>
+      <div class="agent-item"><h4>security-lens-reviewer</h4><p>Plan-level security gaps: auth assumptions, data exposure, threat models.</p></div>
       <div class="agent-item"><h4>feasibility-reviewer</h4><p>Evaluates if proposed approaches survive reality.</p></div>
       <div class="agent-item"><h4>scope-guardian-reviewer</h4><p>Challenges unnecessary abstractions and scope creep.</p></div>
       <div class="agent-item"><h4>spec-flow-analyzer</h4><p>Specs for flow completeness, edge cases, and requirement gaps.</p></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Workflow</div>
+    <div class="agent-grid">
+      <div class="agent-item"><h4>bug-reproduction-validator</h4><p>Systematically reproduces and validates bug reports before fixing.</p></div>
+      <div class="agent-item"><h4>lint</h4><p>Runs linting and code quality checks on Ruby and ERB files.</p></div>
+      <div class="agent-item"><h4>pr-comment-resolver</h4><p>Evaluates and resolves PR review threads with structured summaries.</p></div>
+      <div class="agent-item"><h4>ankane-readme-writer</h4><p>Creates READMEs following Ankane-style template for Ruby gems.</p></div>
     </div>
   </div>
 </div>
@@ -759,7 +792,7 @@
 </div><!-- /container -->
 
 <footer>
-  Claude Code v2.1.89 &middot; Opus 4.6 (1M context) &middot; April 1, 2026
+  Claude Code v2.1.96 &middot; Opus 4.6 (1M context) &middot; April 8, 2026
   <br>
   <a href="https://github.com/anthropics/claude-code">github.com/anthropics/claude-code</a>
 </footer>
