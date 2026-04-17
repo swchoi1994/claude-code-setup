@@ -345,6 +345,138 @@
     color: var(--accent);
     text-decoration: none;
   }
+  .socials {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .socials a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .socials svg { width: 16px; height: 16px; }
+
+  /* === TOKEN DASHBOARD === */
+  .dash-wrap {
+    background: #0a0a0b;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 12px 40px rgba(8, 12, 24, 0.18);
+  }
+  .dash-card {
+    background: #131315;
+    border: 1px solid #1f1f23;
+    border-radius: 14px;
+    padding: 22px;
+    color: #fafafa;
+  }
+  .dash-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .dash-tabs, .dash-filters {
+    display: inline-flex;
+    gap: 2px;
+    padding: 3px;
+    background: transparent;
+  }
+  .dash-tab, .dash-filter {
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #71717a;
+    border-radius: 8px;
+    font-family: inherit;
+    user-select: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .dash-tab:hover, .dash-filter:hover { color: #d4d4d8; }
+  .dash-tab.active, .dash-filter.active {
+    background: #27272a;
+    color: #fafafa;
+  }
+  .dash-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  @media (max-width: 720px) {
+    .dash-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .dash-stat {
+    background: #18181b;
+    border: 1px solid #26262a;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .dash-stat .dlabel {
+    font-size: 0.78rem;
+    color: #a1a1aa;
+    margin-bottom: 4px;
+  }
+  .dash-stat .dvalue {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fafafa;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .heatmap {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 16px;
+    gap: 4px;
+    margin-top: 18px;
+    margin-bottom: 12px;
+    justify-content: start;
+    overflow-x: auto;
+  }
+  .hcell {
+    width: 16px;
+    height: 16px;
+    background: #1f1f23;
+    border-radius: 3px;
+  }
+  .hcell.l1 { background: #1e3a8a; opacity: 0.55; }
+  .hcell.l2 { background: #3b82f6; opacity: 0.65; }
+  .hcell.l3 { background: #60a5fa; opacity: 0.8; }
+  .hcell.l4 { background: #2563eb; }
+  .heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: #71717a;
+    margin-top: 4px;
+    margin-bottom: 12px;
+  }
+  .heatmap-legend .hcell { width: 11px; height: 11px; border-radius: 2px; }
+  .dash-note {
+    font-size: 0.82rem;
+    color: #a1a1aa;
+    margin-top: 2px;
+  }
 
   /* === SUB-SECTION LABEL === */
   .sub-label {
@@ -359,7 +491,7 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <div class="badge">v2.1.112 &middot; Claude Opus 4.6 &middot; 1M context</div>
+    <div class="badge" id="versionBadge">v2.1.112 &middot; Claude Opus 4.6 &middot; 1M context</div>
     <h1>Claude Code Feature Showcase</h1>
     <p>A fully loaded AI development environment with plugins, skills, specialized agents, and deep integrations &mdash; all configured for high-effort, autonomous engineering workflows.</p>
   </div>
@@ -789,12 +921,219 @@
   </div>
 </div>
 
+<!-- ==================== USAGE DASHBOARD ==================== -->
+<div class="section">
+  <div class="section-title">Personal Usage Dashboard</div>
+  <p class="sub-label">Lifetime Claude Code activity for <code>swchoi1994</code>. Snapshot as of 2026-04-17.</p>
+
+  <div class="dash-wrap">
+    <div class="dash-card">
+      <div class="dash-head">
+        <div class="dash-tabs" role="tablist">
+          <button type="button" class="dash-tab active" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+          <button type="button" class="dash-tab" data-tab="models" role="tab" aria-selected="false">Models</button>
+        </div>
+        <div class="dash-filters" role="tablist">
+          <button type="button" class="dash-filter active" data-range="all" role="tab" aria-selected="true">All</button>
+          <button type="button" class="dash-filter" data-range="30d" role="tab" aria-selected="false">30d</button>
+          <button type="button" class="dash-filter" data-range="7d" role="tab" aria-selected="false">7d</button>
+        </div>
+      </div>
+
+      <div class="dash-grid" id="dashGrid"></div>
+
+      <div class="heatmap" id="usageHeatmap" aria-label="Daily activity"></div>
+
+      <div class="heatmap-legend">
+        <span>Less</span>
+        <span class="hcell"></span>
+        <span class="hcell l1"></span>
+        <span class="hcell l2"></span>
+        <span class="hcell l3"></span>
+        <span class="hcell l4"></span>
+        <span>More</span>
+      </div>
+
+      <p class="dash-note" id="dashNote">You&rsquo;ve used ~289&times; more tokens than <em>Animal Farm</em>.</p>
+    </div>
+  </div>
+</div>
+
 </div><!-- /container -->
 
+<script>
+  // === AUTO-UPDATING BADGE ===
+  // Version is fetched live from npm; model/context is the one constant you edit when you switch models.
+  (function () {
+    var MODEL_DISPLAY = 'Claude Opus 4.6';
+    var MODEL_SHORT   = 'Opus 4.6';
+    var CONTEXT       = '1M context';
+    var NPM_PACKAGE   = '@anthropic-ai/claude-code';
+
+    function init() {
+      var badge  = document.getElementById('versionBadge');
+      var fVer   = document.getElementById('footerVersion');
+      var fModel = document.getElementById('footerModel');
+      var fDate  = document.getElementById('footerDate');
+
+      if (fModel) fModel.textContent = MODEL_SHORT + ' (' + CONTEXT + ')';
+      if (fDate) {
+        fDate.textContent = new Date().toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+      }
+
+      function applyVersion(ver) {
+        var v = 'v' + ver;
+        if (badge) badge.innerHTML = v + ' \u00b7 ' + MODEL_DISPLAY + ' \u00b7 ' + CONTEXT;
+        if (fVer)  fVer.textContent = v;
+      }
+
+      fetch('https://registry.npmjs.org/' + NPM_PACKAGE + '/latest', { cache: 'no-cache' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) { if (data && data.version) applyVersion(data.version); })
+        .catch(function () { /* keep static fallback */ });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+<script>
+  (function () {
+    var OVERVIEW_STATS = [
+      ['Sessions', '96'],
+      ['Messages', '40,453'],
+      ['Total tokens', '11.3M'],
+      ['Active days', '38'],
+      ['Current streak', '5d'],
+      ['Longest streak', '5d'],
+      ['Peak hour', '2 PM'],
+      ['Favorite model', 'Opus 4.6']
+    ];
+    var MODELS_STATS = [
+      ['Opus 4.7', '412K'],
+      ['Opus 4.6', '7.9M'],
+      ['Sonnet 4.6', '2.3M'],
+      ['Haiku 4.5', '684K'],
+      ['Opus share', '73.5%'],
+      ['Sonnet share', '20.4%'],
+      ['Haiku share', '6.1%'],
+      ['Models used', '4']
+    ];
+
+    var RANGES = {
+      all:   { cols: 30, rows: 7, seed: 3,  emptyEarly: 10,
+               label: 'Daily activity over the last 30 weeks',
+               note: 'You\u2019ve used ~289\u00d7 more tokens than <em>Animal Farm</em>.' },
+      '30d': { cols: 5,  rows: 7, seed: 41, emptyEarly: 0,
+               label: 'Daily activity over the last 30 days',
+               note: 'Last 30 days &middot; 2.1M tokens, 18 active days.' },
+      '7d':  { cols: 7,  rows: 1, pattern: [0, 0, 3, 2, 4, 3, 2],
+               label: 'Daily activity over the last 7 days',
+               note: 'Last 7 days &middot; 412K tokens, 5-day streak active.' }
+    };
+
+    var state = { tab: 'overview', range: 'all' };
+
+    function levelFor(col, row, cfg) {
+      var seed = ((col + cfg.seed) * 7 + row * 13 + col * row) % 97;
+      var right = cfg.cols > 1 ? col / (cfg.cols - 1) : 1;
+      var weight = right * right;
+      var v = (seed / 97) * 0.55 + weight * 0.85;
+      if (cfg.emptyEarly && col < cfg.emptyEarly && seed % 7 !== 0) return 0;
+      if (v > 0.95) return 4;
+      if (v > 0.75) return 3;
+      if (v > 0.55) return 2;
+      if (v > 0.38) return 1;
+      return 0;
+    }
+
+    function renderStats() {
+      var grid = document.getElementById('dashGrid');
+      if (!grid) return;
+      var data = state.tab === 'overview' ? OVERVIEW_STATS : MODELS_STATS;
+      grid.innerHTML = data.map(function (s) {
+        return '<div class="dash-stat"><div class="dlabel">' + s[0] +
+               '</div><div class="dvalue">' + s[1] + '</div></div>';
+      }).join('');
+    }
+
+    function renderHeatmap() {
+      var grid = document.getElementById('usageHeatmap');
+      var note = document.getElementById('dashNote');
+      if (!grid) return;
+      var cfg = RANGES[state.range];
+      grid.innerHTML = '';
+      grid.style.gridTemplateRows = 'repeat(' + cfg.rows + ', 16px)';
+      grid.setAttribute('aria-label', cfg.label);
+      if (note) note.innerHTML = cfg.note;
+
+      if (cfg.pattern) {
+        cfg.pattern.forEach(function (lv) {
+          var cell = document.createElement('div');
+          cell.className = 'hcell' + (lv > 0 ? ' l' + lv : '');
+          grid.appendChild(cell);
+        });
+        return;
+      }
+      for (var c = 0; c < cfg.cols; c++) {
+        for (var r = 0; r < cfg.rows; r++) {
+          var cell = document.createElement('div');
+          var lv = levelFor(c, r, cfg);
+          cell.className = 'hcell' + (lv > 0 ? ' l' + lv : '');
+          grid.appendChild(cell);
+        }
+      }
+    }
+
+    function setActive(selector, matchAttr, value) {
+      document.querySelectorAll(selector).forEach(function (el) {
+        var on = el.dataset[matchAttr] === value;
+        el.classList.toggle('active', on);
+        el.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+    }
+
+    document.querySelectorAll('.dash-tab').forEach(function (el) {
+      el.addEventListener('click', function () {
+        state.tab = el.dataset.tab;
+        setActive('.dash-tab', 'tab', state.tab);
+        renderStats();
+      });
+    });
+    document.querySelectorAll('.dash-filter').forEach(function (el) {
+      el.addEventListener('click', function () {
+        state.range = el.dataset.range;
+        setActive('.dash-filter', 'range', state.range);
+        renderHeatmap();
+      });
+    });
+
+    renderStats();
+    renderHeatmap();
+  })();
+</script>
+
 <footer>
-  Claude Code v2.1.112 &middot; Opus 4.6 (1M context) &middot; April 17, 2026
+  Claude Code <span id="footerVersion">v2.1.112</span> &middot; <span id="footerModel">Opus 4.6 (1M context)</span> &middot; <span id="footerDate">April 17, 2026</span>
   <br>
-  <a href="https://github.com/anthropics/claude-code">github.com/anthropics/claude-code</a>
+  Built by Seongwoo Choi &middot; <a href="https://github.com/anthropics/claude-code">github.com/anthropics/claude-code</a>
+  <div class="socials" aria-label="Social links">
+    <a href="https://www.linkedin.com/in/swchoi1994/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+    </a>
+    <a href="https://github.com/swchoi1994" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.4.6.1.82-.26.82-.58v-2.2c-3.34.72-4.04-1.42-4.04-1.42-.54-1.38-1.33-1.75-1.33-1.75-1.08-.74.08-.72.08-.72 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.8 1.3 3.48 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.4 1.24-3.24-.12-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.24.96-.27 2-.4 3.03-.4s2.07.13 3.03.4c2.3-1.56 3.3-1.24 3.3-1.24.66 1.65.24 2.87.12 3.17.77.84 1.24 1.92 1.24 3.24 0 4.63-2.8 5.65-5.48 5.95.43.37.82 1.1.82 2.22v3.3c0 .32.22.7.83.58C20.56 22.3 24 17.8 24 12.5 24 5.87 18.63.5 12 .5z"/></svg>
+    </a>
+    <a href="https://x.com/swchoi1994" target="_blank" rel="noopener" aria-label="X / Twitter">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+  </div>
 </footer>
 
 </body>
