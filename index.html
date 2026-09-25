@@ -491,7 +491,7 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <div class="badge" id="versionBadge">v2.1.281 &middot; Claude Opus 4.6 &middot; 1M context</div>
+    <div class="badge" id="versionBadge" data-claude="badge">v2.1.281 &middot; Claude Opus 5.5 &middot; 1M context</div>
     <h1>Claude Code Feature Showcase</h1>
     <p>A fully loaded AI development environment with plugins, skills, specialized agents, and deep integrations &mdash; all configured for high-effort, autonomous engineering workflows.</p>
   </div>
@@ -961,47 +961,10 @@
 
 </div><!-- /container -->
 
-<script>
-  // === AUTO-UPDATING BADGE ===
-  // Version is fetched live from npm; model/context is the one constant you edit when you switch models.
-  (function () {
-    var MODEL_DISPLAY = 'Claude Opus 4.6';
-    var MODEL_SHORT   = 'Opus 4.6';
-    var CONTEXT       = '1M context';
-    var NPM_PACKAGE   = '@anthropic-ai/claude-code';
-
-    function init() {
-      var badge  = document.getElementById('versionBadge');
-      var fVer   = document.getElementById('footerVersion');
-      var fModel = document.getElementById('footerModel');
-      var fDate  = document.getElementById('footerDate');
-
-      if (fModel) fModel.textContent = MODEL_SHORT + ' (' + CONTEXT + ')';
-      if (fDate) {
-        fDate.textContent = new Date().toLocaleDateString('en-US', {
-          year: 'numeric', month: 'long', day: 'numeric'
-        });
-      }
-
-      function applyVersion(ver) {
-        var v = 'v' + ver;
-        if (badge) badge.innerHTML = v + ' \u00b7 ' + MODEL_DISPLAY + ' \u00b7 ' + CONTEXT;
-        if (fVer)  fVer.textContent = v;
-      }
-
-      fetch('https://registry.npmjs.org/' + NPM_PACKAGE + '/latest', { cache: 'no-cache' })
-        .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (data) { if (data && data.version) applyVersion(data.version); })
-        .catch(function () { /* keep static fallback */ });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
-  })();
-</script>
+<!-- === AUTO-UPDATING BADGE ===
+     status.js fills the badge and footer from status.json, which sync-status.sh
+     publishes from Claude Code's status line whenever the version or model in use changes. -->
+<script src="status.js"></script>
 
 <script>
   (function () {
@@ -1120,7 +1083,7 @@
 </script>
 
 <footer>
-  Claude Code <span id="footerVersion">v2.1.281</span> &middot; <span id="footerModel">Opus 4.6 (1M context)</span> &middot; <span id="footerDate">April 17, 2026</span>
+  Claude Code <span id="footerVersion" data-claude="version-tag">v2.1.281</span> &middot; <span id="footerModel" data-claude="model-full">Opus 5.5 (1M context)</span> &middot; <span id="footerDate" data-claude="synced-date">September 25, 2026</span>
   <br>
   Built by Seongwoo Choi &middot; <a href="https://github.com/anthropics/claude-code">github.com/anthropics/claude-code</a>
   <div class="socials" aria-label="Social links">
