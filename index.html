@@ -491,7 +491,7 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <div class="badge" id="versionBadge" data-claude="badge">v2.1.281 &middot; Claude Opus 5.5 &middot; 1M context</div>
+    <div class="badge" id="versionBadge" data-claude="badge">v2.1.299 &middot; Claude Opus 5.5 &middot; 1M context</div>
     <h1>Claude Code Feature Showcase</h1>
     <p>A fully loaded AI development environment with plugins, skills, specialized agents, and deep integrations &mdash; all configured for high-effort, autonomous engineering workflows.</p>
   </div>
@@ -500,11 +500,11 @@
 <!-- STATS -->
 <div class="stats-bar">
   <div class="stats-inner">
-    <div class="stat"><span class="stat-num">6</span><span class="stat-label">Plugins</span></div>
-    <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Skills</span></div>
-    <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Agents</span></div>
-    <div class="stat"><span class="stat-num">20+</span><span class="stat-label">Built-in Tools</span></div>
-    <div class="stat"><span class="stat-num">4</span><span class="stat-label">API Integrations</span></div>
+    <div class="stat"><span class="stat-num">9</span><span class="stat-label">Plugins</span></div>
+    <div class="stat"><span class="stat-num">80+</span><span class="stat-label">Skills</span></div>
+    <div class="stat"><span class="stat-num">6</span><span class="stat-label">Agent Types</span></div>
+    <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Built-in Tools</span></div>
+    <div class="stat"><span class="stat-num">9</span><span class="stat-label">API Integrations</span></div>
     <div class="stat"><span class="stat-num">12</span><span class="stat-label">Projects</span></div>
   </div>
 </div>
@@ -516,34 +516,49 @@
   <div class="section-title">Installed Plugins</div>
   <div class="grid g3">
     <div class="card">
-      <h3>Superpowers <span class="card-ver">v5.0.5</span></h3>
-      <p>Enhanced workflow skills: brainstorming, planning, TDD, debugging, code review, git worktrees, parallel agent dispatch, and verification before completion.</p>
+      <h3>Superpowers <span class="card-ver">v6.4.1</span></h3>
+      <p>Brainstorming, written plans, subagent-driven development with built-in review, systematic debugging, red/green TDD, git worktrees and verification before completion.</p>
       <span class="card-label">claude-plugins-official</span>
     </div>
     <div class="card">
-      <h3>Compound Engineering <span class="card-ver">v2.59.0</span></h3>
-      <p>Full-stack engineering toolkit: frontend design, browser testing, document review, git workflows, research agents, 20+ code review personas.</p>
+      <h3>Compound Engineering <span class="card-ver">v3.30.5</span></h3>
+      <p>36 skills from brainstorm to ship: planning, prototyping, code review, debugging, browser testing, PR babysitting, product strategy and compounding learnings.</p>
       <span class="card-label">EveryInc</span>
     </div>
     <div class="card">
-      <h3>Context7</h3>
-      <p>Live documentation fetcher for any library, framework, or SDK. Queries current docs even when training data is outdated.</p>
+      <h3>Frontend Design</h3>
+      <p>Distinctive, production-grade interfaces that avoid generic AI aesthetics: typography, color, layout and motion decisions made deliberately.</p>
       <span class="card-label">claude-plugins-official</span>
     </div>
     <div class="card">
-      <h3>Code Review</h3>
-      <p>PR review skill that orchestrates multi-persona code review with tiered agents for correctness, security, performance, and style.</p>
+      <h3>Playwright</h3>
+      <p>Microsoft's browser automation MCP server: open pages, click, fill forms and take screenshots to check UI work in a real browser.</p>
+      <span class="card-label">claude-plugins-official</span>
+    </div>
+    <div class="card">
+      <h3>Context7</h3>
+      <p>Live documentation for any library, framework or SDK, version-specific, so answers do not depend on stale training data.</p>
       <span class="card-label">claude-plugins-official</span>
     </div>
     <div class="card">
       <h3>GitHub</h3>
-      <p>Native GitHub integration for issues, pull requests, checks, releases, and repository management via the gh CLI.</p>
+      <p>Official GitHub MCP server: issues, pull requests, reviews, checks and code search, authenticated with the gh login.</p>
       <span class="card-label">claude-plugins-official</span>
     </div>
     <div class="card">
-      <h3>Swift LSP</h3>
-      <p>Language Server Protocol support for Swift development with code intelligence, diagnostics, and completions.</p>
+      <h3>Code Review</h3>
+      <p>Reviews a diff, branch or PR for correctness bugs at a chosen effort level, from a quick pass to a deep multi-agent cloud review.</p>
       <span class="card-label">claude-plugins-official</span>
+    </div>
+    <div class="card">
+      <h3>Swift LSP <span class="card-ver">v1.0.0</span></h3>
+      <p>SourceKit-LSP code intelligence, diagnostics and completions for Swift.</p>
+      <span class="card-label">claude-plugins-official</span>
+    </div>
+    <div class="card">
+      <h3>Claude HUD <span class="card-ver">v0.8.0</span></h3>
+      <p>Configurable heads-up display for the session: context, usage, tools and agents at a glance.</p>
+      <span class="card-label">jarrodwatts</span>
     </div>
   </div>
 </div>
@@ -579,28 +594,28 @@
       <div class="flow-box">
         <div class="fl">Step 4</div>
         <div class="fn">TDD</div>
-        <div class="fs">/test-driven-dev</div>
+        <div class="fs">/test-driven-development</div>
       </div><div class="flow-arrow">&rarr;</div>
     </div>
     <div class="flow-step">
       <div class="flow-box">
         <div class="fl">Step 5</div>
         <div class="fn">Review</div>
-        <div class="fs">/ce-review</div>
+        <div class="fs">/ce-code-review</div>
       </div><div class="flow-arrow">&rarr;</div>
     </div>
     <div class="flow-step">
       <div class="flow-box">
         <div class="fl">Step 6</div>
         <div class="fn">Verify</div>
-        <div class="fs">/verification</div>
+        <div class="fs">/verification-before-completion</div>
       </div><div class="flow-arrow">&rarr;</div>
     </div>
     <div class="flow-step">
       <div class="flow-box">
         <div class="fl">Step 7</div>
         <div class="fn">Ship</div>
-        <div class="fs">/finishing-branch</div>
+        <div class="fs">/finishing-a-development-branch</div>
       </div>
     </div>
   </div>
@@ -632,20 +647,24 @@
     <div class="code-tab">settings.json</div>
     <div class="code-body">{
   "enabledPlugins": {
-    "code-review@claude-plugins-official":          true,
-    "context7@claude-plugins-official":              true,
-    "github@claude-plugins-official":                true,
-    "swift-lsp@claude-plugins-official":             true,
-    "superpowers@claude-plugins-official":            true,
-    "compound-engineering@compound-engineering-plugin": true
+    "superpowers@claude-plugins-official":               true,
+    "compound-engineering@compound-engineering-plugin":  true,
+    "frontend-design@claude-plugins-official":           true,
+    "playwright@claude-plugins-official":                true,
+    "context7@claude-plugins-official":                  true,
+    "github@claude-plugins-official":                    true,
+    "code-review@claude-plugins-official":               true,
+    "swift-lsp@claude-plugins-official":                 true,
+    "claude-hud@claude-hud":                             true
   },
   "extraKnownMarketplaces": {
-    "compound-engineering-plugin": {
-      "source": { "source": "github", "repo": "EveryInc/compound-engineering-plugin" }
-    }
+    "compound-engineering-plugin": { "source": { "source": "github", "repo": "EveryInc/compound-engineering-plugin" } },
+    "claude-hud": { "source": { "source": "github", "repo": "jarrodwatts/claude-hud" } }
   },
-  "effortLevel": "high",                            <span class="cm">// max reasoning depth</span>
-  "skipDangerousModePermissionPrompt": true           <span class="cm">// faster iteration</span>
+  "effortLevel": "high",                              <span class="cm">// max reasoning depth</span>
+  "statusLine": { "type": "command",
+                  "command": "~/projects/claude-code-setup/sync-status.sh" },  <span class="cm">// keeps this page current</span>
+  "skipDangerousModePermissionPrompt": true             <span class="cm">// faster iteration</span>
 }</div>
   </div>
 </div>
@@ -671,6 +690,7 @@
         <span class="chip">/subagent-driven-development</span>
         <span class="chip">/using-git-worktrees</span>
         <span class="chip">/writing-skills</span>
+        <span class="chip">/diagnosing-superpowers</span>
       </div>
     </div>
     <div class="card">
@@ -679,47 +699,81 @@
         <span class="chip">/ce-brainstorm</span>
         <span class="chip">/ce-plan</span>
         <span class="chip">/ce-work</span>
-        <span class="chip">/ce-review</span>
+        <span class="chip">/ce-code-review</span>
+        <span class="chip">/ce-debug</span>
         <span class="chip">/ce-ideate</span>
         <span class="chip">/ce-compound</span>
-        <span class="chip">/git-commit</span>
-        <span class="chip">/git-commit-push-pr</span>
-        <span class="chip">/git-clean-gone-branches</span>
-        <span class="chip">/git-worktree</span>
-        <span class="chip">/reproduce-bug</span>
-        <span class="chip">/todo-resolve</span>
-        <span class="chip">/claude-permissions-optimizer</span>
+        <span class="chip">/ce-compound-refresh</span>
+        <span class="chip">/ce-commit</span>
+        <span class="chip">/ce-commit-push-pr</span>
+        <span class="chip">/ce-worktree</span>
+        <span class="chip">/ce-resolve-pr-feedback</span>
+        <span class="chip">/ce-babysit-pr</span>
+        <span class="chip">/ce-simplify-code</span>
+        <span class="chip">/ce-sweep</span>
+        <span class="chip">/ce-handoff</span>
+        <span class="chip">/lfg</span>
+        <span class="chip">/wtf</span>
       </div>
     </div>
     <div class="card">
-      <h3>Compound Engineering &mdash; Design &amp; Docs</h3>
+      <h3>Compound Engineering &mdash; Product, Design &amp; Docs</h3>
+      <div class="chips" style="margin-top: 10px;">
+        <span class="chip">/ce-prototype</span>
+        <span class="chip">/ce-polish</span>
+        <span class="chip">/ce-test-browser</span>
+        <span class="chip">/ce-test-xcode</span>
+        <span class="chip">/ce-dogfood</span>
+        <span class="chip">/ce-doc-review</span>
+        <span class="chip">/ce-proof</span>
+        <span class="chip">/ce-explain</span>
+        <span class="chip">/ce-strategy</span>
+        <span class="chip">/ce-product-pulse</span>
+        <span class="chip">/ce-pov</span>
+        <span class="chip">/ce-noslop</span>
+        <span class="chip">/ce-optimize</span>
+        <span class="chip">/ce-bakeoff</span>
+        <span class="chip">/ce-retune</span>
+        <span class="chip">/ce-riffrec-feedback-analysis</span>
+        <span class="chip">/ce-promote</span>
+        <span class="chip">/ce-setup</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Design &amp; Documents</h3>
       <div class="chips" style="margin-top: 10px;">
         <span class="chip">/frontend-design</span>
-        <span class="chip">/agent-browser</span>
-        <span class="chip">/test-browser</span>
-        <span class="chip">/feature-video</span>
-        <span class="chip">/gemini-imagegen</span>
-        <span class="chip">/onboarding</span>
-        <span class="chip">/proof</span>
-        <span class="chip">/document-review</span>
-        <span class="chip">/every-style-editor</span>
+        <span class="chip">/artifact-design</span>
+        <span class="chip">/dataviz</span>
+        <span class="chip">/web-artifacts-builder</span>
+        <span class="chip">/theme-factory</span>
+        <span class="chip">/brand-guidelines</span>
+        <span class="chip">/pptx</span>
+        <span class="chip">/docx</span>
+        <span class="chip">/xlsx</span>
+        <span class="chip">/pdf</span>
+        <span class="chip">/deep-research</span>
+        <span class="chip">/doc-coauthoring</span>
       </div>
     </div>
     <div class="card">
       <h3>Framework &amp; Utilities</h3>
       <div class="chips" style="margin-top: 10px;">
         <span class="chip">/claude-api</span>
-        <span class="chip">/agent-native-architecture</span>
-        <span class="chip">/dhh-rails-style</span>
-        <span class="chip">/andrew-kane-gem-writer</span>
-        <span class="chip">/dspy-ruby</span>
-        <span class="chip">/rclone</span>
+        <span class="chip">/code-review</span>
+        <span class="chip">/security-review</span>
         <span class="chip">/simplify</span>
+        <span class="chip">/run</span>
+        <span class="chip">/init</span>
         <span class="chip">/loop</span>
         <span class="chip">/schedule</span>
         <span class="chip">/update-config</span>
+        <span class="chip">/fewer-permission-prompts</span>
         <span class="chip">/keybindings-help</span>
-        <span class="chip">/apply-anthropic-skill-best-practices</span>
+        <span class="chip">/plugin-authoring</span>
+        <span class="chip">/workflow-authoring</span>
+        <span class="chip">/mcp-builder</span>
+        <span class="chip">/skill-creator</span>
       </div>
     </div>
   </div>
@@ -728,84 +782,25 @@
 <!-- ==================== AGENTS ==================== -->
 <div class="section">
   <div class="section-title">Specialized Sub-Agents</div>
-  <p class="sub-label">Autonomous agents dispatched for specific tasks. Can run in parallel or foreground, each with isolated context.</p>
-
+  <p class="sub-label">Agents run in the background with isolated context, in parallel when the work is independent. Review personas now run inside the review skills (/code-review, /ce-code-review) instead of as standalone agents.</p>
   <div style="margin-bottom: 20px;">
-    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Core</div>
+    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Built-in</div>
     <div class="agent-grid">
-      <div class="agent-item"><h4>Explore</h4><p>Fast codebase exploration &mdash; find files, search code, answer architecture questions.</p></div>
-      <div class="agent-item"><h4>Plan</h4><p>Software architect for designing implementation strategies and identifying trade-offs.</p></div>
-      <div class="agent-item"><h4>claude-code-guide</h4><p>Answers questions about Claude Code features, hooks, MCP servers, and SDK usage.</p></div>
+      <div class="agent-item"><h4>Explore</h4><p>Read-only fan-out search across many files; returns the conclusion, not the file dumps.</p></div>
+      <div class="agent-item"><h4>Plan</h4><p>Software architect for implementation strategies, critical files and trade-offs.</p></div>
+      <div class="agent-item"><h4>general-purpose</h4><p>Multi-step research and execution with the full tool set.</p></div>
+      <div class="agent-item"><h4>claude-code-guide</h4><p>Answers questions about Claude Code, the Agent SDK and the Claude API.</p></div>
+      <div class="agent-item"><h4>fork</h4><p>A copy of the current session with its full context, for a side task that should not block the main thread.</p></div>
+      <div class="agent-item"><h4>statusline-setup</h4><p>Configures the status line.</p></div>
     </div>
   </div>
-
   <div style="margin-bottom: 20px;">
-    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Research</div>
+    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Orchestration</div>
     <div class="agent-grid">
-      <div class="agent-item"><h4>framework-docs-researcher</h4><p>Gathers official docs and best practices for any framework or library.</p></div>
-      <div class="agent-item"><h4>git-history-analyzer</h4><p>Archaeological git analysis &mdash; trace code evolution, understand why patterns exist.</p></div>
-      <div class="agent-item"><h4>repo-research-analyst</h4><p>Deep repo structure, conventions, patterns, and documentation analysis.</p></div>
-      <div class="agent-item"><h4>issue-intelligence-analyst</h4><p>GitHub issue analysis &mdash; recurring themes, pain patterns, severity trends.</p></div>
-      <div class="agent-item"><h4>best-practices-researcher</h4><p>Researches external best practices, community conventions, and implementation guidance.</p></div>
-      <div class="agent-item"><h4>learnings-researcher</h4><p>Searches past solutions to surface institutional knowledge and prevent repeated mistakes.</p></div>
-    </div>
-  </div>
-
-  <div style="margin-bottom: 20px;">
-    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Code Review (27 personas)</div>
-    <div class="agent-grid">
-      <div class="agent-item"><h4>correctness-reviewer</h4><p>Always-on. Logic errors, edge cases, state management bugs, intent mismatches.</p></div>
-      <div class="agent-item"><h4>maintainability-reviewer</h4><p>Always-on. Premature abstraction, dead code, coupling, naming clarity.</p></div>
-      <div class="agent-item"><h4>testing-reviewer</h4><p>Always-on. Coverage gaps, weak assertions, brittle tests, missing edge cases.</p></div>
-      <div class="agent-item"><h4>project-standards-reviewer</h4><p>Always-on. Audits changes against CLAUDE.md/AGENTS.md standards.</p></div>
-      <div class="agent-item"><h4>security-reviewer</h4><p>Auth, endpoints, user input, permissions &mdash; exploitable vulnerabilities.</p></div>
-      <div class="agent-item"><h4>performance-reviewer</h4><p>DB queries, loops, caching, I/O &mdash; scalability and runtime issues.</p></div>
-      <div class="agent-item"><h4>adversarial-reviewer</h4><p>Constructs failure scenarios for large or high-risk diffs.</p></div>
-      <div class="agent-item"><h4>api-contract-reviewer</h4><p>API routes, serialization, versioning &mdash; breaking contract changes.</p></div>
-      <div class="agent-item"><h4>data-migrations-reviewer</h4><p>Migration files, schema changes, data integrity, backfill safety.</p></div>
-      <div class="agent-item"><h4>reliability-reviewer</h4><p>Error handling, retries, circuit breakers, timeouts, health checks.</p></div>
-      <div class="agent-item"><h4>architecture-strategist</h4><p>Pattern compliance, design integrity, structural refactors.</p></div>
-      <div class="agent-item"><h4>code-simplicity-reviewer</h4><p>Final pass for YAGNI violations and simplification opportunities.</p></div>
-      <div class="agent-item"><h4>security-sentinel</h4><p>OWASP compliance, input validation, hardcoded secrets, auth audits.</p></div>
-      <div class="agent-item"><h4>performance-oracle</h4><p>Algorithmic complexity, memory usage, DB queries, scalability.</p></div>
-      <div class="agent-item"><h4>agent-native-reviewer</h4><p>Ensures agent-native parity &mdash; any user action, an agent can also take.</p></div>
-      <div class="agent-item"><h4>pattern-recognition-specialist</h4><p>Design patterns, anti-patterns, naming conventions, duplication.</p></div>
-      <div class="agent-item"><h4>data-integrity-guardian</h4><p>Migration safety, data constraints, transaction boundaries, privacy.</p></div>
-      <div class="agent-item"><h4>schema-drift-detector</h4><p>Cross-references schema.rb changes against included migrations.</p></div>
-      <div class="agent-item"><h4>kieran-typescript-reviewer</h4><p>Strict bar for type safety, clarity, and maintainability in TypeScript.</p></div>
-      <div class="agent-item"><h4>kieran-rails-reviewer</h4><p>Strict bar for clarity, conventions, and maintainability in Rails.</p></div>
-      <div class="agent-item"><h4>kieran-python-reviewer</h4><p>Pythonic clarity, type hints, and maintainability.</p></div>
-      <div class="agent-item"><h4>dhh-rails-reviewer</h4><p>Opinionated DHH perspective on Rails architecture and patterns.</p></div>
-      <div class="agent-item"><h4>previous-comments-reviewer</h4><p>Checks whether prior PR feedback has been addressed in the current diff.</p></div>
-      <div class="agent-item"><h4>deployment-verification-agent</h4><p>Go/No-Go checklists, SQL verification, rollback procedures.</p></div>
-      <div class="agent-item"><h4>cli-agent-readiness-reviewer</h4><p>Reviews CLIs for AI agent readiness using severity-based rubric.</p></div>
-    </div>
-  </div>
-
-  <div style="margin-bottom: 20px;">
-    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Design &amp; Documents</div>
-    <div class="agent-grid">
-      <div class="agent-item"><h4>design-iterator</h4><p>Iterative UI refinement through N screenshot-analyze-improve cycles.</p></div>
-      <div class="agent-item"><h4>design-implementation-reviewer</h4><p>Compares live UI against Figma designs for design fidelity feedback.</p></div>
-      <div class="agent-item"><h4>figma-design-sync</h4><p>Detects and fixes visual differences between implementation and Figma.</p></div>
-      <div class="agent-item"><h4>adversarial-document-reviewer</h4><p>Challenges premises, surfaces assumptions, stress-tests decisions.</p></div>
-      <div class="agent-item"><h4>coherence-reviewer</h4><p>Reviews for internal consistency, contradictions, and terminology drift.</p></div>
-      <div class="agent-item"><h4>product-lens-reviewer</h4><p>Senior product leader perspective on scope and goal alignment.</p></div>
-      <div class="agent-item"><h4>design-lens-reviewer</h4><p>Missing design decisions: IA, interaction states, user flows.</p></div>
-      <div class="agent-item"><h4>security-lens-reviewer</h4><p>Plan-level security gaps: auth assumptions, data exposure, threat models.</p></div>
-      <div class="agent-item"><h4>feasibility-reviewer</h4><p>Evaluates if proposed approaches survive reality.</p></div>
-      <div class="agent-item"><h4>scope-guardian-reviewer</h4><p>Challenges unnecessary abstractions and scope creep.</p></div>
-      <div class="agent-item"><h4>spec-flow-analyzer</h4><p>Specs for flow completeness, edge cases, and requirement gaps.</p></div>
-    </div>
-  </div>
-
-  <div style="margin-bottom: 20px;">
-    <div class="agent-cat" style="margin-bottom: 10px; font-size: 0.75rem;">Workflow</div>
-    <div class="agent-grid">
-      <div class="agent-item"><h4>bug-reproduction-validator</h4><p>Systematically reproduces and validates bug reports before fixing.</p></div>
-      <div class="agent-item"><h4>lint</h4><p>Runs linting and code quality checks on Ruby and ERB files.</p></div>
-      <div class="agent-item"><h4>pr-comment-resolver</h4><p>Evaluates and resolves PR review threads with structured summaries.</p></div>
-      <div class="agent-item"><h4>ankane-readme-writer</h4><p>Creates READMEs following Ankane-style template for Ruby gems.</p></div>
+      <div class="agent-item"><h4>Workflow</h4><p>Deterministic multi-agent scripts: pipelines and parallel fan-out with verification, run in the background.</p></div>
+      <div class="agent-item"><h4>Agent teams</h4><p>Named agents that message each other with SendMessage and are listed with ListAgents.</p></div>
+      <div class="agent-item"><h4>Worktree isolation</h4><p>An agent can work in its own git worktree so parallel features never conflict.</p></div>
+      <div class="agent-item"><h4>Remote agents</h4><p>Agents can run in a cloud environment and on schedules (routines).</p></div>
     </div>
   </div>
 </div>
@@ -839,7 +834,7 @@
       </div>
       <div class="tool-section">
         <div class="tool-section-title">Scheduling &amp; Remote</div>
-        <div class="chips"><span class="chip">CronCreate</span><span class="chip">CronDelete</span><span class="chip">CronList</span><span class="chip">RemoteTrigger</span><span class="chip">AskUserQuestion</span></div>
+        <div class="chips"><span class="chip">CronCreate</span><span class="chip">CronDelete</span><span class="chip">CronList</span><span class="chip">RemoteTrigger</span><span class="chip">ScheduleWakeup</span><span class="chip">Monitor</span><span class="chip">AskUserQuestion</span><span class="chip">Workflow</span><span class="chip">SendMessage</span><span class="chip">Artifact</span><span class="chip">PushNotification</span></div>
       </div>
     </div>
   </div>
@@ -850,20 +845,40 @@
   <div class="section-title">API Integrations (MCP Servers)</div>
   <div class="grid g2">
     <div class="mcp-item">
+      <h3>Refero</h3>
+      <p>Real-world UI and UX references from shipped products, used as design inspiration for landing pages and app screens.</p>
+    </div>
+    <div class="mcp-item">
       <h3>Context7</h3>
-      <p>Live documentation queries for any library, framework, or SDK. Two instances running (plugin + standalone) for redundancy.</p>
+      <p>Version-specific documentation for any library, framework or SDK.</p>
+    </div>
+    <div class="mcp-item">
+      <h3>GitHub</h3>
+      <p>Repositories, issues, pull requests, reviews and checks through the official GitHub MCP server.</p>
+    </div>
+    <div class="mcp-item">
+      <h3>Playwright</h3>
+      <p>Drives a real browser: navigate, click, fill and screenshot to verify UI work.</p>
     </div>
     <div class="mcp-item">
       <h3>Gmail</h3>
-      <p>Read, search, and manage email directly from the coding environment via OAuth authentication.</p>
+      <p>Read, search, draft and organize email.</p>
     </div>
     <div class="mcp-item">
       <h3>Google Calendar</h3>
-      <p>View and manage calendar events, check availability, and create meetings.</p>
+      <p>Events, availability and meeting scheduling.</p>
+    </div>
+    <div class="mcp-item">
+      <h3>Google Drive</h3>
+      <p>Search, read and create Drive files, Docs, Sheets and Slides.</p>
     </div>
     <div class="mcp-item">
       <h3>Notion</h3>
-      <p>Access Notion workspaces &mdash; read pages, query databases, manage content.</p>
+      <p>Pages, databases and comments in Notion workspaces.</p>
+    </div>
+    <div class="mcp-item">
+      <h3>Claude Docs</h3>
+      <p>Living documents created and edited together with Claude.</p>
     </div>
   </div>
 </div>
@@ -871,22 +886,25 @@
 <!-- ==================== PERMISSIONS ==================== -->
 <div class="section">
   <div class="section-title">Pre-Approved Permissions</div>
-  <p class="sub-label">Commands auto-allowed without confirmation prompt, configured in settings.local.json.</p>
+  <p class="sub-label">Commands auto-allowed without a confirmation prompt, configured in ~/.claude/settings.json.</p>
   <div class="perm-pills">
     <span class="perm">python / python3</span>
     <span class="perm">pip / pip3 install</span>
-    <span class="perm">npm install / build / check</span>
+    <span class="perm">uv</span>
+    <span class="perm">npm install / run / build / check</span>
+    <span class="perm">npx</span>
     <span class="perm">bun</span>
     <span class="perm">mkdir / chmod</span>
     <span class="perm">tree / ls / find</span>
     <span class="perm">curl / ping</span>
     <span class="perm">timeout</span>
     <span class="perm">kill / pkill</span>
-    <span class="perm">open</span>
+    <span class="perm">git status / diff / log / add / commit</span>
+    <span class="perm">gh</span>
     <span class="perm">pdflatex / pandoc</span>
     <span class="perm">huggingface-cli</span>
     <span class="perm">WebSearch</span>
-    <span class="perm">WebFetch (cdnjs, metorial, stack-ai)</span>
+    <span class="perm">WebFetch</span>
   </div>
 </div>
 
@@ -904,15 +922,15 @@
     </div>
     <div class="card">
       <h3>Dangerous Mode Enabled</h3>
-      <p>Permission prompts are skipped for faster iteration. Pre-approved commands cover the common toolchain (Python, Node, git, etc.).</p>
+      <p>Permission prompts are skipped for faster iteration. Pre-approved commands cover the common toolchain (Python, Node, git, gh). A local safety hook still scores risky shell commands outside bypass mode.</p>
     </div>
     <div class="card">
       <h3>Multi-Marketplace Plugins</h3>
-      <p>Draws from 3 plugin sources: Anthropic Official, EveryInc (Compound Engineering), and thedotmack (claude-mem). Community + first-party.</p>
+      <p>Draws from 3 plugin sources: Anthropic Official, EveryInc (Compound Engineering) and jarrodwatts (Claude HUD). Community + first-party.</p>
     </div>
     <div class="card">
       <h3>Agent-Native Architecture</h3>
-      <p>30+ specialized sub-agents for research, review, design, and workflow. Tasks are parallelized and isolated by default.</p>
+      <p>Background sub-agents, forks, agent teams and scripted workflows. Independent work runs in parallel, each agent with its own context.</p>
     </div>
     <div class="card">
       <h3>Cross-Session Memory</h3>
@@ -1083,7 +1101,7 @@
 </script>
 
 <footer>
-  Claude Code <span id="footerVersion" data-claude="version-tag">v2.1.281</span> &middot; <span id="footerModel" data-claude="model-full">Opus 5.5 (1M context)</span> &middot; <span id="footerDate" data-claude="synced-date">September 25, 2026</span>
+  Claude Code <span id="footerVersion" data-claude="version-tag">v2.1.299</span> &middot; <span id="footerModel" data-claude="model-full">Opus 5.5 (1M context)</span> &middot; <span id="footerDate" data-claude="synced-date">October 14, 2026</span>
   <br>
   Built by Seongwoo Choi &middot; <a href="https://github.com/anthropics/claude-code">github.com/anthropics/claude-code</a>
   <div class="socials" aria-label="Social links">
