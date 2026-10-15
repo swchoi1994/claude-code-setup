@@ -1,10 +1,10 @@
 {
-  "claude_code_version": "2.1.300",
+  "claude_code_version": "2.1.301",
   "model": {
     "id": "claude-fable-5-1",
     "display_name": "Fable 5.1"
   },
   "context_window_size": 1000000,
-  "updated_at": "2026-10-15T16:17:29Z",
+  "updated_at": "2026-10-15T20:03:54Z",
   "source": "status line"
 }
