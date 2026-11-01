@@ -500,8 +500,8 @@
 <!-- STATS -->
 <div class="stats-bar">
   <div class="stats-inner">
-    <div class="stat"><span class="stat-num">9</span><span class="stat-label">Plugins</span></div>
-    <div class="stat"><span class="stat-num">80+</span><span class="stat-label">Skills</span></div>
+    <div class="stat"><span class="stat-num">56</span><span class="stat-label">Plugins</span></div>
+    <div class="stat"><span class="stat-num">300+</span><span class="stat-label">Skills</span></div>
     <div class="stat"><span class="stat-num">6</span><span class="stat-label">Agent Types</span></div>
     <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Built-in Tools</span></div>
     <div class="stat"><span class="stat-num">9</span><span class="stat-label">API Integrations</span></div>
@@ -514,6 +514,7 @@
 <!-- ==================== PLUGINS ==================== -->
 <div class="section">
   <div class="section-title">Installed Plugins</div>
+  <p class="sub-label">Highlights from 56 enabled plugins across 10 marketplaces.</p>
   <div class="grid g3">
     <div class="card">
       <h3>Superpowers <span class="card-ver">v6.4.1</span></h3>
@@ -559,6 +560,21 @@
       <h3>Claude HUD <span class="card-ver">v0.8.0</span></h3>
       <p>Configurable heads-up display for the session: context, usage, tools and agents at a glance.</p>
       <span class="card-label">jarrodwatts</span>
+    </div>
+    <div class="card">
+      <h3>Product Engineering</h3>
+      <p>Six packs, 43 skills for shipping real products with coding agents, from first idea to paying users: product, ai-shipping, agent-teams, agent-harness, app-stack and work-humanizer.</p>
+      <span class="card-label">phuryn</span>
+    </div>
+    <div class="card">
+      <h3>Shunt <span class="card-ver">v0.2.0</span></h3>
+      <p>Shunts I/O-heavy work to AiKA to save tokens: hooks block full reads of files over 350 lines and redirect to bulk-reader and code-writer scripts backed by the Portal CLI.</p>
+      <span class="card-label">spotify</span>
+    </div>
+    <div class="card">
+      <h3>Spotify Portal <span class="card-ver">v0.1.0</span></h3>
+      <p>Set up, diagnose, search and operate Spotify Portal through Portal CLI workflows, including Fleetshift shifts that apply one change across many repositories.</p>
+      <span class="card-label">spotify</span>
     </div>
   </div>
 </div>
@@ -655,11 +671,22 @@
     "github@claude-plugins-official":                    true,
     "code-review@claude-plugins-official":               true,
     "swift-lsp@claude-plugins-official":                 true,
-    "claude-hud@claude-hud":                             true
+    "claude-hud@claude-hud":                             true,
+    "shunt@portal":                                      true,
+    "portal@portal":                                     true,
+    "product@product-engineering":                       true,
+    "ai-shipping@product-engineering":                   true,
+    "agent-teams@product-engineering":                   true,
+    "agent-harness@product-engineering":                 true,
+    "app-stack@product-engineering":                     true,
+    "work-humanizer@product-engineering":                true
+    <span class="cm">// ...and 40 more</span>
   },
   "extraKnownMarketplaces": {
     "compound-engineering-plugin": { "source": { "source": "github", "repo": "EveryInc/compound-engineering-plugin" } },
-    "claude-hud": { "source": { "source": "github", "repo": "jarrodwatts/claude-hud" } }
+    "claude-hud": { "source": { "source": "github", "repo": "jarrodwatts/claude-hud" } },
+    "portal": { "source": { "source": "github", "repo": "spotify/portal-ai-plugins" } },
+    "product-engineering": { "source": { "source": "github", "repo": "phuryn/product-engineering" }, "autoUpdate": true }
   },
   "effortLevel": "high",                              <span class="cm">// max reasoning depth</span>
   "statusLine": { "type": "command",
@@ -774,6 +801,27 @@
         <span class="chip">/workflow-authoring</span>
         <span class="chip">/mcp-builder</span>
         <span class="chip">/skill-creator</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Product Engineering</h3>
+      <div class="chips" style="margin-top: 10px;">
+        <span class="chip">/product:start-here</span>
+        <span class="chip">/product:propose</span>
+        <span class="chip">/product:value-proposition</span>
+        <span class="chip">/product:beachhead-segment</span>
+        <span class="chip">/ai-shipping:ship-check</span>
+        <span class="chip">/ai-shipping:release-gate</span>
+        <span class="chip">/ai-shipping:security-audit-static</span>
+        <span class="chip">/ai-shipping:test-harness</span>
+        <span class="chip">/agent-teams:delegation</span>
+        <span class="chip">/agent-teams:codex-agents</span>
+        <span class="chip">/agent-harness:handover</span>
+        <span class="chip">/agent-harness:retro</span>
+        <span class="chip">/agent-harness:guardrail-hooks</span>
+        <span class="chip">/app-stack:app-lifecycle</span>
+        <span class="chip">/app-stack:saas-authorization</span>
+        <span class="chip">/work-humanizer</span>
       </div>
     </div>
   </div>
@@ -926,7 +974,7 @@
     </div>
     <div class="card">
       <h3>Multi-Marketplace Plugins</h3>
-      <p>Draws from 3 plugin sources: Anthropic Official, EveryInc (Compound Engineering) and jarrodwatts (Claude HUD). Community + first-party.</p>
+      <p>Draws from 10 plugin sources, including Anthropic Official, EveryInc (Compound Engineering), jarrodwatts (Claude HUD), Spotify (Portal, Shunt) and Paweł Huryn (Product Engineering). Community + first-party.</p>
     </div>
     <div class="card">
       <h3>Agent-Native Architecture</h3>
