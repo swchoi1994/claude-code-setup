@@ -1,10 +1,10 @@
 {
-  "claude_code_version": "2.1.318",
+  "claude_code_version": "2.1.319",
   "model": {
     "id": "claude-opus-5-5",
     "display_name": "Opus 5.5"
   },
   "context_window_size": 1000000,
-  "updated_at": "2026-11-05T18:46:14Z",
+  "updated_at": "2026-11-06T19:47:24Z",
   "source": "status line"
 }
